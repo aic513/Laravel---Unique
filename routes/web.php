@@ -29,7 +29,11 @@ Route::group([], function () {     //убрал из-за того,что это
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     //admin
     Route::get('/', function () {
-        //вернем view макета
+        if(view()->exists('admin.index')) {
+            $data = ['title' => 'Панель администратора'];
+
+            return view('admin.index',$data);
+        }
     });
 
     //admin/pages
@@ -47,9 +51,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     //admin/portfolios
     Route::group(['prefix' => 'portfolios'], function () {
 
-
         Route::get('/', ['uses' => 'PortfolioController@execute', 'as' => 'portfolio']);
-
 
         Route::match(['get', 'post'], '/add', ['uses' => 'PortfolioAddController@execute', 'as' => 'portfolioAdd']);
 
@@ -60,9 +62,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     //admin/services
     Route::group(['prefix' => 'services'], function () {
 
-
         Route::get('/', ['uses' => 'ServiceController@execute', 'as' => 'services']);
-
 
         Route::match(['get', 'post'], '/add', ['uses' => 'ServiceAddController@execute', 'as' => 'serviceAdd']);
 
@@ -74,3 +74,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 });
 
 
+
+Route::auth();
+Route::get('/home', 'HomeController@index');

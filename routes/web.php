@@ -14,7 +14,7 @@
 /*
  * Маршруты без префиксов - главная
  */
-Route::group(['middleware' => 'web'], function () {
+Route::group([], function () {     //убрал из-за того,что этот посредник прописан в RouteServiceProvider,иначе не будет отправляться почта
     //Маршруты для пользовательской части
     Route::match(['get', 'post'], '/', ['uses' => 'IndexController@execute', 'as' => 'home']);  //главная
     Route::get('/page/{alias}', ['uses' => 'IndexController@execute', 'as' => 'page']);  //подробная

@@ -22,7 +22,7 @@ class PagesAddController extends Controller
             ];
 
 
-            $validator = Validator::make($input, [
+            $validator = Validator::make($input, [    //формируем валидацию для полей
 
                 'name' => 'required|max:255',
                 'alias' => 'required|unique:pages|max:255',
@@ -31,7 +31,10 @@ class PagesAddController extends Controller
             ], $massages);
 
             if($validator->fails()) {    //проверка на валидацию
-                return redirect()->route('pagesAdd')->withErrors($validator)->withInput();
+                return redirect()
+                    ->route('pagesAdd')
+                    ->withErrors($validator)
+                    ->withInput();
             }
 
             //для загрузки файлов

@@ -14,6 +14,18 @@ class PagesEditController extends Controller
 
 
         /*
+         * Удаление инфы из бд
+         */
+
+        /*$page = Page::find($id);*/
+
+        if($request->isMethod('delete')) {
+            $page->delete();
+            return redirect('admin')->with('status','Страница удалена');
+        }
+
+
+        /*
          * Сохранение отредактированной инф-ии в бд
          */
         if($request->isMethod('post')) {

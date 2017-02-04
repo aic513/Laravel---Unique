@@ -7,6 +7,7 @@ use App\Service;     //даем доступ к нашим моделям
 use App\People;
 use App\Page;
 use App\Portfolio;
+use DB;
 
 
 class IndexController extends Controller
@@ -17,12 +18,14 @@ class IndexController extends Controller
         $portfolios = Portfolio::get(array('name', 'filter', 'images'));  //выбрать из указаных полей
         $services = Service::where('id', '<', 20)->get();  //выбрать по условию
         $peoples = People::take(3)->get();//выбрать только 3 записи
+        $tags = DB::table('portfolios')->distinct()->pluck('filter')->toArray();  //вывести уникальную инфу из поля filter таблицы portfolios  в виде массива
         $menu = array();
         foreach ($pages as $page) {
             $item = array('title' => $page->name, 'alias' => $page->alias);
             array_push($menu, $item);
         }
         $item = array('title' => 'Services', 'alias' => 'service');
+
         array_push($menu, $item);
 
         $item = array('title' => 'Portfolio', 'alias' => 'Portfolio');
@@ -40,8 +43,7 @@ class IndexController extends Controller
             'services' => $services,
             'portfolios' => $portfolios,
             'peoples' => $peoples,
-
-
+            'tags' => $tags,
         ));
     }
 }

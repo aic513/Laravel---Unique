@@ -26,13 +26,14 @@ Route::group([], function () {     //убрал из-за того,что это
  * Маршруты с префиксом - админка,
  * например,admin/services и т.д.
  */
+
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     //admin
     Route::get('/', function () {
-        if(view()->exists('admin.index')) {
+        if (view()->exists('admin.index')) {
             $data = ['title' => 'Панель администратора'];
 
-            return view('admin.index',$data);
+            return view('admin.index', $data);
         }
     });
 
@@ -51,28 +52,30 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     //admin/portfolios
     Route::group(['prefix' => 'portfolios'], function () {
 
-        Route::get('/', ['uses' => 'PortfolioController@execute', 'as' => 'portfolio']);
+        Route::get('/', ['uses' => 'PortfoliosController@execute', 'as' => 'portfolio']);
 
-        Route::match(['get', 'post'], '/add', ['uses' => 'PortfolioAddController@execute', 'as' => 'portfolioAdd']);
+        Route::match(['get', 'post'], '/add', ['uses' => 'PortfoliosAddController@execute', 'as' => 'portfoliosAdd']);
 
-        Route::match(['get', 'post', 'delete'], '/edit/{portfolio}', ['uses' => 'PortfolioEditController@execute', 'as' => 'portfolioEdit']);
+        Route::match(['get', 'post', 'delete'], '/edit/{portfolio}', ['uses' => 'PortfoliosEditController@execute', 'as' => 'portfoliosEdit']);
 
     });
 
+    
+    
+    
     //admin/services
     Route::group(['prefix' => 'services'], function () {
 
         Route::get('/', ['uses' => 'ServiceController@execute', 'as' => 'services']);
 
-        Route::match(['get', 'post'], '/add', ['uses' => 'ServiceAddController@execute', 'as' => 'serviceAdd']);
+        Route::match(['get', 'post'], '/add', ['uses' => 'ServiceAddController@execute', 'as' => 'servicesAdd']);
 
-        Route::match(['get', 'post', 'delete'], '/edit/{service}', ['uses' => 'ServiceEditController@execute', 'as' => 'serviceEdit']);
+        Route::match(['get', 'post', 'delete'], '/edit/{service}', ['uses' => 'ServiceEditController@execute', 'as' => 'servicesEdit']);
 
     });
-
-
+    
+    
 });
-
 
 
 Route::auth();

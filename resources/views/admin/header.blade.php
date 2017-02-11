@@ -18,7 +18,7 @@
                 </a>
             </li>
             <li><a href="{{route('portfolio')}}">
-                    <h5>Порфолио</h5>
+                    <h5>Портфолио</h5>
                 </a>
             </li>
             <li><a href="{{route('services')}}">

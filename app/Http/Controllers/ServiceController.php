@@ -14,7 +14,6 @@ class ServiceController extends Controller
                     'title'=>'Услуги',
                     'services'=>$services
                 ];
-
                 return view('admin.services',$data);
             }else{
                 abort(404);

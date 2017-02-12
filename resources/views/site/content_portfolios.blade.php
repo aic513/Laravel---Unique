@@ -12,7 +12,7 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($portfolios as $k => $portfolio)
+            @foreach($portfolios as $key => $portfolio)
                 <tr>
                     <td>{{$portfolio->id}}</td>
                     <td>  {!! Html::link(route('portfoliosEdit',['portfolio'=>$portfolio->id]),$portfolio->name,['alt'=>$portfolio->name]) !!}  </td>

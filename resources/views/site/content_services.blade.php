@@ -11,7 +11,7 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($services as $k => $service)
+            @foreach($services as $key => $service)
                 <tr>
                     <td>{{$service->id}}</td>
                     <td>  {!! Html::link(route('servicesEdit',['service'=>$service->id]),$service->name,['alt'=>$service->name]) !!}  </td>
